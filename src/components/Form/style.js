@@ -70,6 +70,10 @@ const styles = StyleSheet.create({
     radio:{
         marginTop: 15,
         marginLeft: 17,
+    },
+    exhibitionResultImc:{
+        width: '100%',
+        height: '50%',
     }
 });
 

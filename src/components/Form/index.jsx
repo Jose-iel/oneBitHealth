@@ -8,7 +8,7 @@ import {
     Pressable,
     Keyboard
 } from "react-native";
-// import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+// import RadioForm from 'react-native-simple-radio-button';
 import styles from "./style"
 
 import ResultImc from "./ResultImc/index"
@@ -92,14 +92,13 @@ export default function Form(){
             //         }
             //     }
             // }
-            
-            return
+        } else {
+            verificationImc()
+            setImc(null);
+            // setIdealImc(null);
+            setTextButton("Calcular");
+            setMessageImc("Preencha todos os campos");
         }
-        verificationImc()
-        setImc(null);
-        // setIdealImc(null);
-        setTextButton("Calcular");
-        setMessageImc("Preencha todos os campos");
     }
 
     // var radio_props = [
@@ -108,8 +107,9 @@ export default function Form(){
     // ];
 
     return(
-        <Pressable onPress={Keyboard.dismiss} style={styles.formContext}>
-            <View style={styles.form}>
+        <View style={styles.formContext}>
+            {imc == null ? 
+                <Pressable onPress={Keyboard.dismiss} style={styles.form}>
                 {/* <View style={styles.flex}>
                     <View style={styles.boxAge}>
                         <View style={styles.flex}>
@@ -158,13 +158,21 @@ export default function Form(){
                     placeholder="Ex. 68.34" 
                     keyboardType="numeric"
                 />
-                <TouchableOpacity onPress={() => validationImc()} style={styles.buttonCalculator}>
+                 <TouchableOpacity onPress={() => validationImc()} style={styles.buttonCalculator}>
                     <Text style={styles.textButtonCalculator}>{textButton}</Text>
                 </TouchableOpacity>
-            </View>
-            <ResultImc 
-                messageResultImc={messageImc} resultImc={imc}
-            />
-        </Pressable>
+                </Pressable>
+            : 
+                <View style={styles.exhibitionResultImc}>
+                    <ResultImc 
+                        messageResultImc={messageImc} resultImc={imc}
+                    />
+                    <TouchableOpacity onPress={() => validationImc()} style={styles.buttonCalculator}>
+                        <Text style={styles.textButtonCalculator}>{textButton}</Text>
+                    </TouchableOpacity>
+                </View>
+            }
+            
+        </View>
     );
 }
